@@ -8,7 +8,7 @@ class Playlist:
         self.name = name
 
     def get_recommendations(self):
-        """ Get playlist data from spotify """
+        """ Get recommended songs from spotify """
         query = f'https://api.spotify.com/v1/recommendations'
         # query = f'https://api.spotify.com/v1/recommendations?market=US&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_tracks=0c6xIDDpzE81m2q797ordA&min_danceability=.1&max_danceability=.9&target_danceability=.4&min_energy=0.4&min_popularity=50'
         # NOTE: Auth token expires every hour
