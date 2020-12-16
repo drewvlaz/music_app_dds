@@ -9,7 +9,7 @@ class Playlist:
     def __init__(self, name):
         self.name = name
 
-    def get_Auth_Token(self):
+    def get_auth_token(self):
         """ Get authorization token from client credentials """
 
         url = 'https://accounts.spotify.com/api/token'
@@ -62,7 +62,7 @@ class Playlist:
             },
             headers={
                 'Content-Type': 'application/json',
-                'Authorization': f'Bearer {self.get_Auth_Token()}',
+                'Authorization': f'Bearer {self.get_auth_token()}',
             }
         )
 
