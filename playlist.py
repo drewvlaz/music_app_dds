@@ -34,7 +34,7 @@ class Playlist:
 
         return r.json()['access_token']
 
-    def get_recommendations(self, target_acousticness, target_danceability, target_energy, target_liveness):
+    def get_recommendations(self, t_acousticness, t_danceability, t_energy, t_liveness, t_valence):
         """ Get recommended songs from spotify """
 
         url = f'https://api.spotify.com/v1/recommendations'
@@ -45,21 +45,24 @@ class Playlist:
                 # 'fields': 'items(track(album(artists, images), name))'
                 'market': 'US',
                 'seed_artists': '4NHQUGzhtTLFvgF5SZesLK',
-                'seed_genres': 'rap',
+                'seed_genres': 'rap, pop',
                 'seed_tracks': '0c6xIDDpzE81m2q797ordA',
                 'limit': '1',
                 # 'min_acousticness': 0.1,
                 # 'max_acousticness': 0.1,
-                'target_acousticness': target_acousticness,
+                'target_acousticness': t_acousticness,
                 # 'min_danceability': 0.1,
                 # 'max_danceability': 0.1,
-                'target_danceability': target_danceability,
+                'target_danceability': t_danceability,
                 # 'min_energy': 0.1,
                 # 'max_energy': 0.1,
-                'target_energy': target_energy,
+                'target_energy': t_energy,
                 # 'min_liveness': 0.1,
                 # 'max_liveness': 0.1,
-                'target_liveness': target_liveness
+                'target_liveness': t_liveness,
+                # 'min_liveness': 0.1,
+                # 'max_liveness': 0.1,
+                'target_valence': t_valence
             },
             headers={
                 'Content-Type': 'application/json',
