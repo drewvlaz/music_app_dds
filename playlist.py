@@ -30,7 +30,7 @@ class Playlist:
 
         return r.json()['access_token']
 
-    def get_recommendations(self, t_acousticness, t_danceability, t_energy, t_liveness, t_valence):
+    def get_recommendations(self, t_acousticness=None, t_danceability=None, t_energy=None, t_liveness=None, t_valence=None):
         """ Get recommended songs from spotify """
 
         url = f'https://api.spotify.com/v1/recommendations'
