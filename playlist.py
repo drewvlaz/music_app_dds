@@ -1,7 +1,7 @@
 from secrets import CLIENT_ID, CLIENT_SECRET
 
+from random import randint
 import requests
-import json
 import base64
 
 class Playlist:
@@ -30,8 +30,25 @@ class Playlist:
 
         return r.json()['access_token']
 
+    def get_genres(self):
+        """ Get list of available genres"""
+
+        url = 'https://api.spotify.com/v1/recommendations/available-genre-seeds'
+
+        headers = {
+            'Content-Type': 'application/json',
+            'Authorization': f'Bearer {self.__get_auth_token()}',
+        }
+
+        r = requests.get(url, headers=headers)
+
+        return r.json()['genres']
+
     def get_recommendations(self, t_acousticness=None, t_danceability=None, t_energy=None, t_liveness=None, t_valence=None):
         """ Get recommended songs from spotify """
+
+        genres = self.get_genres()
+        seed_genres = ', '.join([genres[randint(0,len(genres)-1)] for _ in range(2)])
 
         url = f'https://api.spotify.com/v1/recommendations'
 
@@ -43,7 +60,7 @@ class Playlist:
         params = {
             'market': 'US',
             'seed_artists': '4NHQUGzhtTLFvgF5SZesLK',
-            'seed_genres': 'rap, pop',
+            'seed_genres': seed_genres,
             'seed_tracks': '0c6xIDDpzE81m2q797ordA',
             'limit': 2
             # 'min_acousticness': 0.1,
