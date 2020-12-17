@@ -4,8 +4,8 @@ from random import randint
 import requests
 import base64
 
-class Playlist:
-    """ Contains and controls playlist elements """
+class SpotifyClient:
+    """ Contains and controls Spotify elements """
 
     def __init__(self, name):
         self.name = name
