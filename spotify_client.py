@@ -37,12 +37,13 @@ class SpotifyClient:
 
         url = 'https://api.spotify.com/v1/recommendations/available-genre-seeds'
 
-        headers = {
-            'Content-Type': 'application/json',
-            'Authorization': f'Bearer {self.access_token}',
-        }
-
-        r = requests.get(url, headers=headers)
+        r = requests.get(
+            url,
+            headers={
+                'Content-Type': 'application/json',
+                'Authorization': f'Bearer {self.access_token}',
+            }
+        )
 
         self.genres = r.json()['genres']
 
@@ -53,39 +54,34 @@ class SpotifyClient:
 
         url = f'https://api.spotify.com/v1/recommendations'
 
-        headers = {
-            'Content-Type': 'application/json',
-            'Authorization': f'Bearer {self.access_token}',
-        }
+        r = requests.get(
+            url,
+            headers={
+                'Content-Type': 'application/json',
+                'Authorization': f'Bearer {self.access_token}',
+            },
+            params={
+                'market': 'US',
+                'seed_artists': '4NHQUGzhtTLFvgF5SZesLK',
+                'seed_genres': seed_genres,
+                'seed_tracks': '0c6xIDDpzE81m2q797ordA',
+                'limit': 1,
+                # 'min_acousticness': 0.1,
+                # 'max_acousticness': 0.1,
+                'target_acousticness': t_acousticness,
+                # 'min_danceability': 0.1,
+                # 'max_danceability': 0.1,
+                'target_danceability': t_danceability,
+                # 'min_energy': 0.1,
+                # 'max_energy': 0.1,
+                'target_energy': t_energy,
+                # 'min_liveness': 0.1,
+                # 'max_liveness': 0.1,
+                'target_liveness': t_liveness,
+                # 'min_valence': 0.1,
+                # 'max_valence': 0.1,
+                'target_valence': t_valence
+            }
+        )
 
-        params = {
-            'market': 'US',
-            'seed_artists': '4NHQUGzhtTLFvgF5SZesLK',
-            'seed_genres': seed_genres,
-            'seed_tracks': '0c6xIDDpzE81m2q797ordA',
-            'limit': 2
-            # 'min_acousticness': 0.1,
-            # 'max_acousticness': 0.1,
-            # 'min_danceability': 0.1,
-            # 'max_danceability': 0.1,
-            # 'min_energy': 0.1,
-            # 'max_energy': 0.1,
-            # 'min_liveness': 0.1,
-            # 'max_liveness': 0.1,
-            # 'min_valence': 0.1,
-            # 'max_valence': 0.1,
-        }
-
-        # Only add param if value passed in
-        if t_acousticness != None:
-            params['target_acousticness'] = t_acousticness
-        if t_danceability != None:
-            params['target_danceability'] = t_danceability
-        if t_energy != None:
-            params['target_energy'] = t_energy
-        if t_liveness != None:
-            params['target_liveness'] = t_liveness
-        if t_valence != None:
-            params['target_valence'] = t_valence
-
-        self.recommendations = requests.get(url, headers=headers, params=params)
+        self.recommendations = r.json()['tracks']
