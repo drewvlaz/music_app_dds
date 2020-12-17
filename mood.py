@@ -5,6 +5,8 @@ import json
 def main():
     client = SpotifyClient("Default Name")
     client.get_recommendations(t_energy=0.2, t_valence=0.1)
-    print(json.dumps(client.recommendations, indent=2))
+    id = client.search_item("Pop Smoke", "artist")
+    print(json.dumps(client.get_artist(id), indent=2))
+    # print(json.dumps(client.recommendations, indent=2))
 
 main()
