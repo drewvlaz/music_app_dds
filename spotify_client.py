@@ -12,6 +12,44 @@ class SpotifyClient:
         self.get_access_token()
         self.get_genres()
 
+    def search_item(self, query, type):
+        """ Search for item in Spotify
+            Type must be:
+            album , artist, playlist, track, show or episode.
+        """
+
+        url = 'https://api.spotify.com/v1/search'
+
+        r = requests.get(
+            url,
+            headers={
+                'Content-Type': 'application/json',
+                'Authorization': f'Bearer {self.access_token}',
+            },
+            params={
+                'q': query,
+                'type': type
+            }
+        )
+
+        return r.json()[f'{type}s']['items'][0]['id']
+
+    def get_artist(self, id):
+        """ Gets an artist using their Spotify ID """
+
+        url = f'https://api.spotify.com/v1/artists/{id}'
+
+        r = requests.get(
+            url,
+            headers={
+                'Content-Type': 'application/json',
+                'Authorization': f'Bearer {self.access_token}',
+            },
+        )
+
+        return r.json()
+
+
     def get_access_token(self):
         """ Get authorization token from client credentials """
 
@@ -46,28 +84,6 @@ class SpotifyClient:
         )
 
         self.genres = r.json()['genres']
-
-    def search_item(self, type, name):
-        """ Search for item in Spotify
-            Type must be:
-            album , artist, playlist, track, show or episode.
-        """
-
-        url = 'https://api.spotify.com/v1/search'
-
-        r = requests.get(
-            url,
-            headers={
-                'Content-Type': 'application/json',
-                'Authorization': f'Bearer {self.access_token}',
-            },
-            params={
-                'q': name,
-                'type': type
-            }
-        )
-
-        return r.json()[f'{type}s']['items'][0]['id']
 
     def get_recommendations(self, t_acousticness=None, t_danceability=None, t_energy=None, t_liveness=None, t_valence=None):
         """ Get recommended songs from Spotify """
