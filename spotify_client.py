@@ -9,8 +9,10 @@ class SpotifyClient:
 
     def __init__(self, name):
         self.name = name
+        self.get_access_token()
+        self.get_genres()
 
-    def __get_auth_token(self):
+    def get_access_token(self):
         """ Get authorization token from client credentials """
 
         url = 'https://accounts.spotify.com/api/token'
@@ -28,33 +30,32 @@ class SpotifyClient:
             data={'grant_type': 'client_credentials'}
         )
 
-        return r.json()['access_token']
+        self.access_token = r.json()['access_token']
 
     def get_genres(self):
-        """ Get list of available genres"""
+        """ Get list of available genres """
 
         url = 'https://api.spotify.com/v1/recommendations/available-genre-seeds'
 
         headers = {
             'Content-Type': 'application/json',
-            'Authorization': f'Bearer {self.__get_auth_token()}',
+            'Authorization': f'Bearer {self.access_token}',
         }
 
         r = requests.get(url, headers=headers)
 
-        return r.json()['genres']
+        self.genres = r.json()['genres']
 
     def get_recommendations(self, t_acousticness=None, t_danceability=None, t_energy=None, t_liveness=None, t_valence=None):
         """ Get recommended songs from spotify """
 
-        genres = self.get_genres()
-        seed_genres = ', '.join([genres[randint(0,len(genres)-1)] for _ in range(2)])
+        seed_genres = ', '.join([self.genres[randint(0,len(self.genres)-1)] for _ in range(2)])
 
         url = f'https://api.spotify.com/v1/recommendations'
 
         headers = {
             'Content-Type': 'application/json',
-            'Authorization': f'Bearer {self.__get_auth_token()}',
+            'Authorization': f'Bearer {self.access_token}',
         }
 
         params = {
