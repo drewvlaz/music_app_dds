@@ -47,8 +47,30 @@ class SpotifyClient:
 
         self.genres = r.json()['genres']
 
+    def search_item(self, type, name):
+        """ Search for item in Spotify
+            Type must be:
+            album , artist, playlist, track, show or episode.
+        """
+
+        url = 'https://api.spotify.com/v1/search'
+
+        r = requests.get(
+            url,
+            headers={
+                'Content-Type': 'application/json',
+                'Authorization': f'Bearer {self.access_token}',
+            },
+            params={
+                'q': name,
+                'type': type
+            }
+        )
+
+        return r.json()[f'{type}s']['items'][0]['id']
+
     def get_recommendations(self, t_acousticness=None, t_danceability=None, t_energy=None, t_liveness=None, t_valence=None):
-        """ Get recommended songs from spotify """
+        """ Get recommended songs from Spotify """
 
         seed_genres = ', '.join([self.genres[randint(0,len(self.genres)-1)] for _ in range(2)])
 
