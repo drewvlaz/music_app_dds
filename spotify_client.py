@@ -65,7 +65,7 @@ class SpotifyClient:
                 'seed_artists': '4NHQUGzhtTLFvgF5SZesLK',
                 'seed_genres': seed_genres,
                 'seed_tracks': '0c6xIDDpzE81m2q797ordA',
-                'limit': 1,
+                'limit': 5,
                 # 'min_acousticness': 0.1,
                 # 'max_acousticness': 0.1,
                 'target_acousticness': t_acousticness,
@@ -84,4 +84,4 @@ class SpotifyClient:
             }
         )
 
-        self.recommendations = r.json()['tracks']
+        self.recommendations = [r.json()['tracks'][x]['preview_url'] for x in range(len(r.json()['tracks']))]
