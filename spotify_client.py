@@ -31,10 +31,12 @@ class SpotifyClient:
                 'type': type
             }
         )
+
         try:
             return r.json()[f'{type}s']['items'][0]['id']
         except:
-            raise SpotifyException("Bad Search Parameter")
+            # raise SpotifyException("Bad Search Parameter")
+            return None
 
     def get_artist(self, id):
         """ Gets an artist using their Spotify ID """
