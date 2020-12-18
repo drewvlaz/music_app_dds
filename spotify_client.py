@@ -147,8 +147,10 @@ class SpotifyClient:
             }
         )
 
-        # return [r.json()['tracks'][x]['uri'] for x in range(len(r.json()['tracks']))]
-        return [r.json()['tracks'][x]['preview_url'] for x in range(len(r.json()['tracks']))]
+        tracks = r.json()['tracks']
+
+        # return [track['uri'] for track in tracks]
+        return [track['preview_url'] for track in tracks]
 
 class SpotifyException(Exception):
 	pass
