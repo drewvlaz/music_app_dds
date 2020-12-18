@@ -31,8 +31,10 @@ class SpotifyClient:
                 'type': type
             }
         )
-
-        return r.json()[f'{type}s']['items'][0]['id']
+        try:
+            return r.json()[f'{type}s']['items'][0]['id']
+        except:
+            raise SpotifyException("Bad Search Parameter")
 
     def get_artist(self, id):
         """ Gets an artist using their Spotify ID """
@@ -123,3 +125,6 @@ class SpotifyClient:
         )
 
         self.recommendations = [r.json()['tracks'][x]['preview_url'] for x in range(len(r.json()['tracks']))]
+
+class SpotifyException(Exception):
+	pass
