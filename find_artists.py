@@ -55,11 +55,11 @@ class FindArtists_wiki:
 
 		artists = set()
 
-		temp = self.__getAllNamesInPage(link1)
+		temp = self.__getAllNamesInPage(link2)
 		if temp != None:
 			artists = temp
 		else:
-			temp = self.__getAllNamesInPage(link2)
+			temp = self.__getAllNamesInPage(link1)
 			if temp != None:
 				artists = temp
 			else:
