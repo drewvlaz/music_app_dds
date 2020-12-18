@@ -111,9 +111,10 @@ class SpotifyClient:
     def get_recommendations(
         self,
         popular: bool = True,
+        t_tempo: int = None,
         t_danceability: float = None,
         t_energy: float = None,
-        t_speechiness: float = None,
+        t_instrumentalness: float = None,
         t_valence: float = None
         ):
         """ Get recommended songs from Spotify """
@@ -134,19 +135,12 @@ class SpotifyClient:
                 'seed_genres': seed_genres,
                 'seed_tracks': '0c6xIDDpzE81m2q797ordA',
                 'limit': 50,
-                'min_popularity': 50 if popular else None,
-                # 'min_danceability': 0.1,
-                # 'max_danceability': 0.1,
-                'target_danceability': t_danceability,
-                # 'min_energy': 0.1,
-                # 'max_energy': 0.1,
-                'target_energy': t_energy,
-                # 'min_speechiness': 0.1,
-                # 'max_speechiness': 0.1,
-                'target_speechiness': t_speechiness,
-                # 'min_valence': 0.1,
-                # 'max_valence': 0.1,
-                'target_valence': t_valence
+                'min_popularity': 50 if popular else None,      # value 0 - 100
+                'target_tempo': t_tempo,                        # no range given
+                'target_danceability': t_danceability,          # value 0.0 - 1.0
+                'target_energy': t_energy,                      # value 0.0 - 1.0
+                'target_instrumentalness': t_instrumentalness,  # value 0.0 - 1.0
+                'target_valence': t_valence                     # value 0.0 - 1.0
             }
         )
 
