@@ -10,47 +10,7 @@ class SpotifyClient:
     def __init__(self, name):
         self.name = name
         self.get_access_token()
-        self.get_genres()
-
-    def search_item(self, query, type):
-        """ Search for item in Spotify
-            Type must be:
-            album , artist, playlist, track, show or episode.
-        """
-
-        url = 'https://api.spotify.com/v1/search'
-
-        r = requests.get(
-            url,
-            headers={
-                'Content-Type': 'application/json',
-                'Authorization': f'Bearer {self.access_token}',
-            },
-            params={
-                'q': query,
-                'type': type
-            }
-        )
-        try:
-            return r.json()[f'{type}s']['items'][0]['id']
-        except:
-            raise SpotifyException("Bad Search Parameter")
-
-    def get_artist(self, id):
-        """ Gets an artist using their Spotify ID """
-
-        url = f'https://api.spotify.com/v1/artists/{id}'
-
-        r = requests.get(
-            url,
-            headers={
-                'Content-Type': 'application/json',
-                'Authorization': f'Bearer {self.access_token}',
-            },
-        )
-
-        return r.json()
-
+        self.get_all_genres()
 
     def get_access_token(self):
         """ Get authorization token from client credentials """
@@ -72,7 +32,7 @@ class SpotifyClient:
 
         self.access_token = r.json()['access_token']
 
-    def get_genres(self):
+    def get_all_genres(self):
         """ Get list of available genres """
 
         url = 'https://api.spotify.com/v1/recommendations/available-genre-seeds'
@@ -87,7 +47,76 @@ class SpotifyClient:
 
         self.genres = r.json()['genres']
 
-    def get_recommendations(self, t_acousticness=None, t_danceability=None, t_energy=None, t_liveness=None, t_valence=None):
+    def search_item(self, query, type):
+        """ Search for item in Spotify
+            Type must be:
+            album, artist, playlist, track, show or episode.
+        """
+
+        url = 'https://api.spotify.com/v1/search'
+
+        r = requests.get(
+            url,
+            headers={
+                'Content-Type': 'application/json',
+                'Authorization': f'Bearer {self.access_token}',
+            },
+            params={
+                'q': query,
+                'type': type
+            }
+        )
+
+        try:
+            return r.json()[f'{type}s']['items'][0]['id']
+        except:
+            # raise SpotifyException("Bad Search Parameter")
+            return None
+
+    def get_artist(self, id):
+        """ Gets an artist using their Spotify ID """
+
+        url = f'https://api.spotify.com/v1/artists/{id}'
+
+        r = requests.get(
+            url,
+            headers={
+                'Content-Type': 'application/json',
+                'Authorization': f'Bearer {self.access_token}',
+            }
+        )
+
+        return r.json()
+
+    def get_multiple_artists(self, ids):
+        """ Gets up to 50 artists using their Spotify IDs """
+
+        url = f'https://api.spotify.com/v1/artists'
+
+        formatted_ids = ', '.join(ids)
+
+        r = requests.get(
+            url,
+            headers={
+                'Content-Type': 'application/json',
+                'Authorization': f'Bearer {self.access_token}',
+            },
+            params={
+                'ids': formatted_ids
+            }
+        )
+
+        return r.json()
+
+    def get_recommendations(
+        self,
+        popular: bool = True,
+        t_tempo: int = None,
+        t_danceability: float = None,
+        t_energy: float = None,
+        t_instrumentalness: float = None,
+        t_valence: float = None
+        ):
         """ Get recommended songs from Spotify """
 
         seed_genres = ', '.join([self.genres[randint(0,len(self.genres)-1)] for _ in range(2)])
@@ -105,26 +134,17 @@ class SpotifyClient:
                 'seed_artists': '4NHQUGzhtTLFvgF5SZesLK',
                 'seed_genres': seed_genres,
                 'seed_tracks': '0c6xIDDpzE81m2q797ordA',
-                'limit': 5,
-                # 'min_acousticness': 0.1,
-                # 'max_acousticness': 0.1,
-                'target_acousticness': t_acousticness,
-                # 'min_danceability': 0.1,
-                # 'max_danceability': 0.1,
-                'target_danceability': t_danceability,
-                # 'min_energy': 0.1,
-                # 'max_energy': 0.1,
-                'target_energy': t_energy,
-                # 'min_liveness': 0.1,
-                # 'max_liveness': 0.1,
-                'target_liveness': t_liveness,
-                # 'min_valence': 0.1,
-                # 'max_valence': 0.1,
-                'target_valence': t_valence
+                'limit': 50,
+                'min_popularity': 50 if popular else None,      # value 0 - 100
+                'target_tempo': t_tempo,                        # no range given
+                'target_danceability': t_danceability,          # value 0.0 - 1.0
+                'target_energy': t_energy,                      # value 0.0 - 1.0
+                'target_instrumentalness': t_instrumentalness,  # value 0.0 - 1.0
+                'target_valence': t_valence                     # value 0.0 - 1.0
             }
         )
 
-        self.recommendations = [r.json()['tracks'][x]['preview_url'] for x in range(len(r.json()['tracks']))]
+        return [r.json()['tracks'][x]['preview_url'] for x in range(len(r.json()['tracks']))]
 
 class SpotifyException(Exception):
 	pass
