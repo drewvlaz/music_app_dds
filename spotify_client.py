@@ -47,7 +47,7 @@ class SpotifyClient:
 
         self.genres = r.json()['genres']
 
-    def search_item(self, query, type):
+    def search_item(self, query, q_type):
         """ Search for item in Spotify
             Type must be:
             album, artist, playlist, track, show or episode.
@@ -63,12 +63,12 @@ class SpotifyClient:
             },
             params={
                 'q': query,
-                'type': type
+                'type': q_type
             }
         )
 
         try:
-            return r.json()[f'{type}s']['items'][0]['id']
+            return r.json()[f'{q_type}s']['items'][0]['id']
         except:
             # raise SpotifyException("Bad Search Parameter")
             return None
@@ -93,8 +93,6 @@ class SpotifyClient:
 
         url = f'https://api.spotify.com/v1/artists'
 
-        formatted_ids = ','.join(ids)
-
         r = requests.get(
             url,
             headers={
@@ -102,7 +100,7 @@ class SpotifyClient:
                 'Authorization': f'Bearer {self.access_token}',
             },
             params={
-                'ids': formatted_ids
+                'ids': ','.join(ids)
             }
         )
 
@@ -147,10 +145,8 @@ class SpotifyClient:
             }
         )
 
-        tracks = r.json()['tracks']
-
-        # return [track['uri'] for track in tracks]
-        return [track['preview_url'] for track in tracks]
+        # return [track['uri'] for track in r.json()['tracks']]
+        return [track['preview_url'] for track in r.json()['tracks']]
 
 class SpotifyException(Exception):
 	pass
