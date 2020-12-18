@@ -15,7 +15,7 @@ class SpotifyClient:
     def search_item(self, query, type):
         """ Search for item in Spotify
             Type must be:
-            album , artist, playlist, track, show or episode.
+            album, artist, playlist, track, show or episode.
         """
 
         url = 'https://api.spotify.com/v1/search'
@@ -105,7 +105,7 @@ class SpotifyClient:
                 'seed_artists': '4NHQUGzhtTLFvgF5SZesLK',
                 'seed_genres': seed_genres,
                 'seed_tracks': '0c6xIDDpzE81m2q797ordA',
-                'limit': 5,
+                'limit': 50,
                 # 'min_acousticness': 0.1,
                 # 'max_acousticness': 0.1,
                 'target_acousticness': t_acousticness,
