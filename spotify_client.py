@@ -93,7 +93,7 @@ class SpotifyClient:
 
         url = f'https://api.spotify.com/v1/artists'
 
-        formatted_ids = ', '.join(ids)
+        formatted_ids = ','.join(ids)
 
         r = requests.get(
             url,
@@ -110,7 +110,10 @@ class SpotifyClient:
 
     def get_recommendations(
         self,
+        s_artist: str = 'Taylor Swift',
+        s_track: str = 'Humble and Kind',
         popular: bool = True,
+        random: bool = True,
         t_tempo: int = None,
         t_danceability: float = None,
         t_energy: float = None,
@@ -119,7 +122,7 @@ class SpotifyClient:
         ):
         """ Get recommended songs from Spotify """
 
-        seed_genres = ', '.join([self.genres[randint(0,len(self.genres)-1)] for _ in range(2)])
+        random_genres = ','.join([self.genres[randint(0,len(self.genres)-1)] for _ in range(2)])
 
         url = f'https://api.spotify.com/v1/recommendations'
 
@@ -131,10 +134,10 @@ class SpotifyClient:
             },
             params={
                 'market': 'US',
-                'seed_artists': '4NHQUGzhtTLFvgF5SZesLK',
-                'seed_genres': seed_genres,
-                'seed_tracks': '0c6xIDDpzE81m2q797ordA',
-                'limit': 50,
+                'seed_artists': self.search_item(s_artist, 'Artist'),
+                'seed_genres': random_genres if random else 'pop',
+                'seed_tracks': self.search_item(s_track, 'Track'),
+                'limit': 20,
                 'min_popularity': 50 if popular else None,      # value 0 - 100
                 'target_tempo': t_tempo,                        # no range given
                 'target_danceability': t_danceability,          # value 0.0 - 1.0
@@ -144,6 +147,7 @@ class SpotifyClient:
             }
         )
 
+        # return [r.json()['tracks'][x]['uri'] for x in range(len(r.json()['tracks']))]
         return [r.json()['tracks'][x]['preview_url'] for x in range(len(r.json()['tracks']))]
 
 class SpotifyException(Exception):
