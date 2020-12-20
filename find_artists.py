@@ -27,7 +27,11 @@ class FindArtists_wiki:
 			for x in subCats_rawData:
 				result = x.attrs['href']
 				#print("RECURSION USED:   " + result)
-				local_artists = local_artists | self.__getAllNamesInPage("https://en.wikipedia.org" + result)
+				temp_result = self.__getAllNamesInPage("https://en.wikipedia.org" + result)
+				if temp_result != None:
+					local_artists = local_artists | temp_result
+				else:
+					print ("There is a page in wiki with no artists in it for some reason")
 		except AttributeError:
 			pass
 
