@@ -105,16 +105,29 @@ class ArtistGenre:
         return all_info
 
     def getArtistGenreFromSpotify(self, artist):
-        # get rid of wiki formatting if it is there
+        try_again = True
         if artist.find("(") != -1:
             artist = artist[0:artist.find("(") - 1]
         genres = []
-        spotClass = SpotifyClient("DJ?Does this do anything")
-        # can through "bad search parameters" SpotifyException and needs to be caught when this called
-        artist_id = spotClass.search_item(artist, "artist")
-        artist_json_data = spotClass.get_artist(artist_id)
-        for x in artist_json_data['genres']:
-            genres.append(x)
-        return genres
+
+        #added since spotify has errors for too many requests, but im not sure how what error that would be
+        while try_again == True:
+            try:
+                try_again = False
+                # get rid of wiki formatting if it is there
+                spotClass = SpotifyClient("DJ?Does this do anything")
+                # can through "bad search parameters" SpotifyException and needs to be caught when this called
+                artist_id = spotClass.search_item(artist, "artist")
+                artist_json_data = spotClass.get_artist(artist_id)
+                for x in artist_json_data['genres']:
+                    genres.append(x)
+                return genres
+            except SpotifyException:
+                raise SpotifyException
+            except:
+                try_again = True
+                print (artist + ":   getArtistGenreFromSpotify Error. Trying again in 3 seconds")
+                time.sleep(3)
+
 
 
