@@ -1,0 +1,4 @@
+Ivan Kupala (band):['World music', 'New-age music', 'Ethnic electronica']
+Yevstigney Fomin:[]
+Tequilajazzz:['Alternative rock', 'Experimental rock', 'Jazz rock', 'Punk rock', 'Indie rock']
+Sergey Shnurov:['Ska', 'Ska punk', 'Rock music']

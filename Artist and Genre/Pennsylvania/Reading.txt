@@ -1,0 +1,8 @@
+Ronald Noll:[]
+Taylor Swift:['Pop music', 'Country music', 'Rock music', 'Folk music', 'Indie pop']
+Arthur Schutt:[]
+Richie Kotzen:['Hard rock', 'Blues rock', 'Rhythm and blues', 'Blue-eyed soul', 'Jazz fusion', 'Pop rock', 'Progressive metal', 'Funk rock', 'Instrumental rock', 'Heavy metal music']
+Roy Smeck:['Country music', 'Ragtime', 'Music of Hawaii']
+Paul Althouse:[]
+David Robidoux:['Orchestra']
+George Britton (musician):[]

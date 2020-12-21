@@ -1,0 +1,6 @@
+Leanna Crawford:['Christian music']
+Marion Hutton:[]
+Johnny Whitney:['Post-hardcore', 'Art punk', 'Electronic music']
+Layne Staley:['Alternative metal', 'Alternative rock', 'Grunge', 'Hard rock', 'Glam metal']
+Gentle Thunder:[]
+Bill Crow:['Jazz']

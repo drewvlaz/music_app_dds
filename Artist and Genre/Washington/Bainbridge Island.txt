@@ -1,0 +1,4 @@
+Jherek Bischoff:['Alternative rock']
+Ben Shepherd:['Alternative metal', 'Grunge', 'Alternative rock', 'Heavy metal music']
+Chad Channing:['Hard rock', 'Grunge', 'Indie rock', 'Alternative rock', 'Punk rock', 'Hardcore punk']
+Andrew Wood (singer):['Alternative rock', 'Grunge', 'Glam punk']

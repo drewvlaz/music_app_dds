@@ -1,0 +1,8 @@
+Jon Shain:['Folk music', 'Americana (music)', 'Piedmont blues']
+Teddy Kotick:[]
+Termanology:['Hip hop music']
+Brian Evans (singer):['Big band', 'Crooning']
+Rob Zombie:['Heavy metal music', 'Hard rock', 'Industrial metal', 'Shock rock', 'Nu metal']
+Louis Alter:['tin pan alley']
+Marty Manning:['Traditional pop music']
+Spider One:['Industrial metal', 'Nu metal', 'Hard rock', 'Alternative metal', 'Electronics in rock music', 'Punk rock']

@@ -1,0 +1,7 @@
+Peter Hollens:['Classically trained', 'Vocalist', 'A cappella']
+Michael Ruppert:[]
+Jon Micah Sumrall:[]
+Rose Maddox:['Country music']
+Scott Kelly (musician):['Heavy metal music', 'Experimental music', 'Hardcore punk', 'Folk music']
+Larry Wagner:['Big Band']
+Alice DiMicele:['Folk music']

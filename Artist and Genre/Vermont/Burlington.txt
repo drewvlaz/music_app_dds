@@ -1,0 +1,7 @@
+Caroline Rose:['Indie pop', 'Indie rock', 'Alternative country', 'Rockabilly']
+Morgan Page:['Progressive house', 'Electro house']
+Tristan Honsinger:[]
+James Kochalka:['vermont indie']
+Ray Paczkowski:[]
+Gregory Douglass:['Folk rock', 'Alternative rock']
+Erin "Syd" Sidney:['Indie rock']

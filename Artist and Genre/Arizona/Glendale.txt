@@ -1,0 +1,6 @@
+Jordin Sparks:['Contemporary R&B', 'Pop music']
+Marty Robbins:['Country music', 'Western music (North America)', 'Rockabilly', 'Folk music']
+Knights of the Abyss:['Deathcore']
+Craig Mabbitt:['Post-hardcore', 'Metalcore', 'Hard rock']
+David Hernandez (singer):['Soul', 'R&B', 'pop', 'gospel']
+Nate Ruess:['Indie pop', 'Alternative rock', 'Indie rock', 'Baroque pop']

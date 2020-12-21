@@ -1,0 +1,7 @@
+Rosalind Elias:['classical mezzo-soprano']
+Professor Lyrical:[]
+George Whitefield Chadwick:['american romanticism', 'post-romantic era']
+Pervez Taufiq:['Hard rock', 'Alternative metal', 'Heavy metal music', 'Post-grunge', 'Nu metal']
+Scott Grimes:['Pop rock', 'Soft rock']
+John Kellette:['Broadway theater', 'Musical theatre', 'Revue', 'Show tune']
+Gary Hoey:['Rock music', 'Hard rock', 'Heavy metal music', 'Blues rock']
