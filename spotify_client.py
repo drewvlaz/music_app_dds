@@ -110,8 +110,8 @@ class SpotifyClient:
 
     def get_recommendations(
         self,
-        s_artist: str = 'Taylor Swift',
-        s_track: str = 'Humble and Kind',
+        s_artist: str = None,
+        s_track: str = None,
         popular: bool = True,
         random: bool = True,
         t_tempo: int = None,
